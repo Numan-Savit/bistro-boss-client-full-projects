@@ -1,5 +1,6 @@
 import othersImg from '../../../assets/others/profile.png';
 
+
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
@@ -21,7 +22,14 @@ const Navbar = () => {
         <li className="font-bold"><Link>DASHBOARD</Link></li>
         <li className="font-bold"><Link to ="/menu">OUR MENU</Link></li>
         <li className="font-bold"><Link to ="/order/salad">OUR SHOP</Link></li>
-        <li className="font-bold"><Link to ="/secret">SECRET</Link></li>
+        <li className="font-bold"><Link to ="/secret">SECRET</Link></li> 
+        <li className=''>
+           <Link to ="/">
+            <div className=" text-center items-center">
+               <div className="badge badge-sm badge-secondary text-white">+99</div>
+            </div>
+            </Link>
+        </li>
 
         {
           user ? <>
@@ -58,12 +66,16 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="navbar-end">
+
              <button className=" text-white">
-                <div className="avatar">
-                  <div className="w-10 rounded-full">
-                    <img src={othersImg} />
-                  </div>
-                </div>
+               {
+                user ? (
+                   <span className="font-bold">{user.displayName}</span>
+                ) : (
+                    <img src={othersImg} alt="profile" className="w-10 h-10 rounded-full" />
+                    )
+                }
+
               </button>
                
             </div>

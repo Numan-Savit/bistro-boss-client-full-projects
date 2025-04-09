@@ -1,9 +1,31 @@
 
 // step-13___________________________________________________________________________________2
+
+import { useNavigate } from "react-router-dom";
+import UseAuth from "../Hooks/UseAuth";
+
+
+
 // step-14_____________________________________________________________________________________1
 const FoodCard = ({item}) => {
 
     const { name, image, price, recipe } = item;
+
+    const {user} = UseAuth(); //step-28___________________________________________3
+    const navigate = useNavigate();
+    // step-27___________________________________________________________________________________1
+
+    const handleAddToCart = (food) => {
+        if(user && user.email){
+          // send cart item to the database
+         
+        }
+        else{
+          alert('Please Login First');
+          navigate('/login');
+        }
+    }
+
 
     return (
         <div className="mt-10">
@@ -21,7 +43,7 @@ const FoodCard = ({item}) => {
                <p>{recipe}</p>
                
                <div className="card-actions">
-                 <button className="btn btn-primary">ADD TO CART</button>
+                 <button onClick={() => handleAddToCart(item)} className="btn btn-primary">ADD TO CART</button>
                </div>
              </div>
            </div>
