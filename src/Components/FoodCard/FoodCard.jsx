@@ -1,28 +1,48 @@
 
-// step-13___________________________________________________________________________________2
+// step-13______________________________________________________________________2
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../Hooks/UseAuth";
+import UseAxiosSecure from "../Hooks/UseAxiosSecure";
+import UseCart from "../Hooks/UseCart";
 
 
-
-// step-14_____________________________________________________________________________________1
+// step-14_______________________________________________________________________1
 const FoodCard = ({item}) => {
 
-    const { name, image, price, recipe } = item;
+    const { name, image, price, recipe, _id } = item;
 
     const {user} = UseAuth(); //step-28___________________________________________3
     const navigate = useNavigate();
-    // step-27___________________________________________________________________________________1
+    const location = useLocation();  //step-29____________________________________1
+    const axiosSecure = UseAxiosSecure();
+    const [, refetch] = UseCart();   //step-31-___________________________________6
+    // step-27____________________________________________________________________1
 
     const handleAddToCart = (food) => {
         if(user && user.email){
-          // send cart item to the database
+          // send cart item to the server database
+          const cartItem = {                //step-29______________________________2
+             menuId: _id,
+             email: user.email,
+             name: food.name,
+             image: food.image,
+             price: food.price,
+             
+          }
+          axiosSecure.post('/carts', cartItem)  //step-29____________3
+          .then(res => {
+            console.log(res.data);
+            if(res.data.insertedId){
+              alert('Item Added Successfully');  
+            }
+            refetch();    //step-31-7
+          })
          
         }
         else{
           alert('Please Login First');
-          navigate('/login');
+          navigate('/login', {state: {from: location}});
         }
     }
 

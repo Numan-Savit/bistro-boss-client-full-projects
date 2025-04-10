@@ -7,6 +7,8 @@ import Login from "../Components/Pages/Login/SignUp";
 import SignUp from "../Components/Pages/Login/Login";
 import Secret from "../Components/Pages/Shared/Secret";
 import PraivateRoutes from "./PraivateRoutes";
+import Dashboard from "../Components/Dashboard/Dashboard";
+import Cart from "../Components/Dashboard/Cart";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,17 @@ const router = createBrowserRouter([
       }
     ],
   },
+  
+  {
+    path: "dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "cart",
+        element: <Cart></Cart>
+      }
+    ]
+  }
 ]);
   
 export default router;

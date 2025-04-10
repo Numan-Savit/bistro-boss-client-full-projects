@@ -4,12 +4,14 @@ import othersImg from '../../../assets/others/profile.png';
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import UseCart from '../../Hooks/UseCart';
 
 
 const Navbar = () => {
 
     const {user, logOut} = useContext(AuthContext);   //step-24__________________________1
-    
+    const [carts] = UseCart();  //step-30________________________________________________3
+
     const handleLogOut = () => {
         logOut()
         .then(() => {})
@@ -24,9 +26,9 @@ const Navbar = () => {
         <li className="font-bold"><Link to ="/order/salad">OUR SHOP</Link></li>
         <li className="font-bold"><Link to ="/secret">SECRET</Link></li> 
         <li className=''>
-           <Link to ="/">
+           <Link to ="/dashboard/cart">
             <div className=" text-center items-center">
-               <div className="badge badge-sm badge-secondary text-white">+99</div>
+               <div className="badge badge-sm badge-secondary text-white">+{carts.length}</div>
             </div>
             </Link>
         </li>
