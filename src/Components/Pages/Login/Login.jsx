@@ -5,6 +5,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { useContext, useEffect,useState } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import SocialLogin from '../Shared/SocialLogin';
 
 const Login = () => {
 
@@ -92,9 +93,9 @@ const Login = () => {
                      
                       <input disabled={disable} className="btn btn-primary w-" type="submit" value="Login" />
                     </form>
+                     <div className='flex justify-center mt-3'><SocialLogin></SocialLogin></div>
                     <p className='text-center mt-5'>New to Bistro Boss?
-                     <Link to = '/signup' className="link link-hover underline">Create an account</Link></p>
-                    
+                     <Link to = '/signup' className="link link-hover underline">Create an account</Link></p>  
                   </div>
                 </div>
               </div>

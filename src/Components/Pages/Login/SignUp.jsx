@@ -9,9 +9,14 @@ import loginImg from '../../../assets/others/authentication1.png';
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import SocialLogin from '../Shared/SocialLogin';
+
 
 
 const SignUp = () => {
+
+  const axiosPublic = useAxiosPublic(); //step-35______________________4
 
   const {
     register,
@@ -32,18 +37,35 @@ const SignUp = () => {
      .then(result => {
         const loggedUser = result.user;    //step-23___________________________2
         console.log(loggedUser);
-        updateUserProfile(data.name, data.photoURL)
+        updateUserProfile(data.name, data.photoURL )
         .then(() => {
-          reset();
-          Swal.fire({
-            title: "User Created Successfully!",
-            icon: "success",
-            draggable: true
-          });
-          navigate('/');
-        })
-        .catch(error => console.log(error));
+
+          const userInfo = {
+            name: data.name,
+            email: data.email,          //step-35______________________________5
+            photoURL: data.photoURL
+          }
+
+          axiosPublic.post('/users', userInfo)
+          .then(res => {
+            //step-35__________________________________________________________6
+            if(res.data.insertedId){
+              console.log("user created successfully");
+              reset();
+              Swal.fire({
+                title: "User Created Successfully!",
+                icon: "success",
+                draggable: true
+              });
+              navigate('/')
+            }
+          })
+          
+          // .catch(error => console.log(error));
      })
+     .catch(error => console.log(error));
+  })
+  
   };
 
  
@@ -86,6 +108,8 @@ const SignUp = () => {
                       <div><a className="link link-hover">Forgot password?</a></div>
                       <input className="btn btn-primary w-" type="submit" value="Login" />
                     </form>
+
+                    <div className='mt-3 flex justify-center'><SocialLogin></SocialLogin></div>
 
                     <p className='text-center mt-5'>Already have an account?
                      <Link to = '/login' className="link link-hover underline">Login</Link></p>
