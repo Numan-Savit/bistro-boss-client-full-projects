@@ -1,12 +1,13 @@
 // step-25_____________________________________________________________________1
 
-import { useContext } from "react";
-import { AuthContext } from "../providers/AuthProvider";
+// import { useContext } from "react";
+// import { AuthContext } from "../providers/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
+import UseAuth from "../Components/Hooks/UseAuth";
 
 const PraivateRoutes = ({children}) => {
 
-    const {user, loading} = useContext(AuthContext);
+    const {user, loading} = UseAuth();
     const location = useLocation();                  //step-25_________________3
 
     if(loading){

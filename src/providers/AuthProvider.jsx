@@ -36,6 +36,8 @@ import { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword,  signInWithPopup,  signOut, updateProfile } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
+import useAxiosPublic from '../Components/Hooks/useAxiosPublic';
+
 
 export const AuthContext = createContext(null);
 
@@ -47,6 +49,8 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
 
     const googleProvider = new GoogleAuthProvider(); //step-36__________________2
+
+    const axiosPublic = useAxiosPublic();  //step-41______________________2
     
     // step-21___________________________________________________________________2_start
     const createUser = (email, password) => {
@@ -84,14 +88,30 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            console.log('current user', currentUser);
+
+            // get token and store client
+
+            if(currentUser){              //step-41______________________2
+              const userInfo = {email: currentUser.email}
+              axiosPublic.post('/jwt', userInfo)
+              .then(res => {
+                if(res.data.token){
+                  localStorage.setItem('access-token', res.data.token);
+                }
+              })
+            }
+            else{
+              localStorage.removeItem('access-token');
+            }
+
+
             setLoading(false);
         });
 
         return () => {
             return unsubscribe();
         }
-    },[])
+    },[axiosPublic])
 
     // step-21_______________________________________________________________________1_end
 

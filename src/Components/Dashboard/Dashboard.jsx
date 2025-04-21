@@ -7,10 +7,11 @@ import { IoMenu } from "react-icons/io5";
 import { MdRestaurantMenu } from "react-icons/md";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { RiContactsBookFill } from "react-icons/ri";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
 
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
 
     return (
         <div className="flex">

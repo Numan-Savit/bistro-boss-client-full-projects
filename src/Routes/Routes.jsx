@@ -10,6 +10,8 @@ import PraivateRoutes from "./PraivateRoutes";
 import Dashboard from "../Components/Dashboard/Dashboard";
 import Cart from "../Components/Dashboard/Cart";
 import AllUsers from "../Components/Dashboard/AllUsers";
+import AddItems from "../Components/Dashboard/AddItems";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,8 @@ const router = createBrowserRouter([
     path: "dashboard",
     element: <PraivateRoutes><Dashboard></Dashboard></PraivateRoutes>,
     children: [
+      
+      // normal user routes
       {
         path: "cart",
         element: <Cart></Cart>
@@ -54,8 +58,12 @@ const router = createBrowserRouter([
 
       // admin routes
       {
+        path: "addItems",
+        element: <AdminRoute><AddItems></AddItems></AdminRoute>
+      },
+      {
         path: "allUsers",
-        element: <AllUsers></AllUsers>
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
       }
     ]
   }
