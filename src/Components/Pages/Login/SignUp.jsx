@@ -106,7 +106,7 @@ const SignUp = () => {
                       <label className="fieldset-label">Password</label>
                       <input type="password" {...register("password", { required: true, minLength: 6})} name="password" className="input" placeholder="Password" />
                       <div><a className="link link-hover">Forgot password?</a></div>
-                      <input className="btn btn-primary w-" type="submit" value="Login" />
+                      <input className="btn btn-primary w-" type="submit" value="Sign Up" />
                     </form>
 
                     <div className='mt-3 flex justify-center'><SocialLogin></SocialLogin></div>

@@ -5,6 +5,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import UseCart from "../Hooks/UseCart";
 import Swal from "sweetalert2";
 import UseAxiosSecure from "../Hooks/UseAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
 
@@ -48,7 +49,16 @@ const Cart = () => {
             <div className="text-center md:flex md:justify-evenly font-bold">
                 <h3 className="text-xl md:text-3xl">Total Items: {cart.length}</h3>
                 <h3 className="text-xl md:text-3xl">Total Price : ${cart.reduce((a, c) => a + c.price, 0)}</h3>
-                <button className="btn btn-primary text-2xl">Pay</button>
+
+                { cart.length?                      //step-52______________________________2
+                  <Link to={'/dashboard/payment'}>
+                   <button className="btn btn-primary text-2xl">Pay</button>
+                  </Link>
+                  :
+                  <button className="btn btn-primary text-2xl" disabled>Pay</button>
+
+                }
+
             </div>
 
             <div className="overflow-x-auto mt-15">
