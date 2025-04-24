@@ -15,6 +15,7 @@ import AdminRoute from "./AdminRoute";
 import ManageItems from "../Components/Dashboard/ManageItems";
 import UpdateItem from "../Components/Dashboard/UpdateItem";
 import Payment from "../Components/Dashboard/Payment/Payment";
+import PaymentHistory from "../Components/Dashboard/Payment/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: 'payment',
         element: <Payment></Payment>
+      },
+      {
+        path: 'paymentHistory',
+        element: <PaymentHistory></PaymentHistory>
       },
 
       // admin routes

@@ -8,6 +8,7 @@ import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import UseCart from "../../Hooks/UseCart";
 import UseAuth from "../../Hooks/UseAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 // import { data } from "react-router-dom";
 
 
@@ -24,6 +25,8 @@ const CheckOutForm = () => {
     const elements = useElements();
 
     const {user} = UseAuth();
+
+    const navigate = useNavigate();
 
     const [cart, refetch] = UseCart();  //step-55_______________________2
     const totalPrice = cart.reduce((total, item) => total + item.price, 0); //step-55_____________________3
@@ -104,7 +107,7 @@ const CheckOutForm = () => {
             data: new Date(),
             cartIds: cart.map(item => item._id),
             menuItemIds: cart.map(item => item.menuId),
-            status: 'service pending',   
+            status: 'Pending',   
           }
           const res = await axiosSecure.post('/payments', payment);
           console.log(res.data);
@@ -116,6 +119,7 @@ const CheckOutForm = () => {
               icon: "success",
               draggable: true
            });
+           navigate('/dashboard/paymentHistory');
           }
 
         }
