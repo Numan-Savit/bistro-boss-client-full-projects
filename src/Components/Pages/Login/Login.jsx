@@ -68,6 +68,9 @@ const Login = () => {
        if(validateCaptcha (user_captcha_value)){
           setDisable(false);
        }
+       else{
+        setDisable(true);
+       }
     }
 
 

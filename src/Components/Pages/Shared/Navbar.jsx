@@ -7,10 +7,16 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import UseCart from '../../Hooks/UseCart';
 
 
+
 const Navbar = () => {
+  
+  
 
     const {user, logOut} = useContext(AuthContext);   //step-24__________________________1
     const [carts] = UseCart();  //step-30________________________________________________3
+
+    // const [ isAdmin] = useAdmin();
+    // const { data: isAdmin } = useAdmin(user?.id);
 
     const handleLogOut = () => {
         logOut()
@@ -18,10 +24,11 @@ const Navbar = () => {
         .catch(error => console.log(error))
     }
 
+   
+
     const navOptions = <>
  
         <li className="font-bold"><Link to ="/">HOME</Link></li>
-        <li className="font-bold"><Link>DASHBOARD</Link></li>
         <li className="font-bold"><Link to ="/menu">OUR MENU</Link></li>
         <li className="font-bold"><Link to ="/order/salad">OUR SHOP</Link></li>
         <li className="font-bold"><Link to ="/secret">SECRET</Link></li> 
@@ -35,7 +42,7 @@ const Navbar = () => {
 
         {
           user ? <>
-               <button onClick={handleLogOut} className=" text-white font-bold text-10">LOGOUT</button>
+               <button onClick={handleLogOut} className=" font-bold text-10">LOGOUT</button>
             </> : <>
               <li className="font-bold"><Link to ="/login">LOGIN</Link></li>
           </>
@@ -46,7 +53,7 @@ const Navbar = () => {
     return (
         <div>
 
-          <div className="navbar fixed z-10  md:w-7xl sm:text-black md:text-white opacity-95 bg-cyan-950 bg-opacity-80  ">
+          <div className="navbar h-40 fixed z-8 top-0  md:w-7xl sm:text-black md:text-black  bg-white ">
             <div className="navbar-start">
               <div className="dropdown ">
                 <div tabIndex={0} role="button" className="btn btn-ghost text-white lg:hidden">
@@ -59,7 +66,7 @@ const Navbar = () => {
                 </ul>
               </div>
               
-              <a className="btn btn-ghost text-xl text-white md:text-white">BISTRO BOSS</a>
+              <a className="btn btn-ghost text-xl ">BISTRO BOSS</a>
               
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -69,7 +76,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
 
-             <button className=" text-white">
+             <button className="">
                {
                 user ? (
                    <span className="font-bold">{user.displayName}</span>
