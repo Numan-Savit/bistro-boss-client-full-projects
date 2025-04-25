@@ -10,7 +10,7 @@ import SocialLogin from '../Shared/SocialLogin';
 const Login = () => {
 
     
-    const [disable, setDisable] = useState(true);
+    const [, setDisable] = useState(true);
 
     const {signIn} = useContext(AuthContext);  //step-21______________________________3
     // step-25_______________________________________4
@@ -94,7 +94,7 @@ const Login = () => {
                       <label className="fieldset-label"><LoadCanvasTemplate /></label>  
                       <input onBlur = {handleValidateCaoptcha} type="text"  name="captcha" className="input" placeholder="Type Captcha" />
                      
-                      <input disabled={disable} className="btn btn-primary w-" type="submit" value="Login" />
+                      <input  className="btn btn-primary w-" type="submit" value="Login" />
                     </form>
                      <div className='flex justify-center mt-3'><SocialLogin></SocialLogin></div>
                     <p className='text-center mt-5'>New to Bistro Boss?
